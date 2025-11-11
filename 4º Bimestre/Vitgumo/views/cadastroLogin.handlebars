@@ -1,0 +1,186 @@
+<link rel="stylesheet" href="/css/style.css">
+{{> header}}
+
+<!-- TELA DE CADASTRO -->
+<div id="register-screen" class="active">
+  <h1>Cadastre-se</h1>
+
+  <form id="register-form">
+    <input type="text" name="nome" placeholder="Nome completo" required>
+    <input type="text" name="cpf" placeholder="CPF" required>
+    <input type="email" name="email" placeholder="E-mail" required>
+    <input type="password" name="password" placeholder="Senha" required>
+    <input type="password" name="Cpassword" placeholder="Confirme sua senha" required>
+    <div class="msg" id="register-msg"></div>
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <button id="register-login-button" class="toggle-btn">
+    Já tenho uma conta
+  </button>
+</div>
+
+<!-- TELA DE LOGIN -->
+<div id="login-screen">
+  <h1>Login</h1>
+
+  <form id="login-form">
+    <input type="text" name="cpf-email" placeholder="CPF ou E-mail" required>
+    <input type="password" name="password" placeholder="Senha" required>
+    <div class="msg" id="login-msg"></div>
+    <button type="submit">Entrar</button>
+  </form>
+
+  <button id="login-register-button" class="toggle-btn">
+    Não tenho conta
+  </button>
+</div>
+
+<style>
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --primary: #003566;
+  --accent: #ff6b35;
+  --radius: 12px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --transition: 0.25s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(180deg, var(--bg) 40%, #ffffff);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px 5%;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 60px;
+  color: var(--primary);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* === Forms === */
+form {
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface);
+  padding: 30px 24px;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  transition: all var(--transition);
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 15px;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 53, 102, 0.1);
+}
+
+button[type="submit"] {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+
+button[type="submit"]:hover {
+  background: #002b4d;
+  transform: translateY(-2px);
+}
+
+/* === Mensagens e links === */
+.msg {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 6px;
+  text-align: center;
+  min-height: 18px;
+}
+
+.toggle-btn {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+  transition: color var(--transition), transform var(--transition);
+}
+
+.toggle-btn:hover {
+  color: var(--primary);
+  text-decoration: underline;
+  transform: translateY(-1px);
+}
+
+/* === Layout === */
+#register-screen, #login-screen {
+  display: none;
+  width: 100%;
+  max-width: 420px;
+  animation: fadeIn 0.3s ease;
+}
+
+#register-screen.active {
+  display: block;
+}
+
+#login-screen.active {
+  display: block;
+}
+
+/* === Animation === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Responsivo === */
+@media (max-width: 500px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+  form {
+    padding: 22px 16px;
+  }
+  input {
+    font-size: 14px;
+  }
+}
+</style>

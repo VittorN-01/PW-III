@@ -1,0 +1,87 @@
+<header class="header">
+  <a href="/" class="btn-voltar">Voltar</a>
+  <div class="logo">
+    <img src="/img/logo.png" alt="Logo Vitgumo">
+  </div>
+</header>
+
+<style>
+  /* Garante que o body não empurre nada */
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .header {
+    position: fixed;        /* fixa no topo da tela */
+    top: 0;
+    left: 0;
+    width: 100%;            /* ocupa toda a largura */
+    height: 70px;           /* altura definida */
+    background: var(--primary, #003566);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* centraliza a logo */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+
+  /* Adiciona espaçamento no conteúdo abaixo do header */
+  body {
+    padding-top: 70px; /* evita sobrepor o conteúdo */
+    background: var(--bg, #f8fafc);
+  }
+
+  /* Botão Voltar na extrema esquerda */
+  .btn-voltar {
+    position: absolute;
+    left: 20px;
+    background: var(--accent, #ff6b35);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+
+  .btn-voltar:hover {
+    background: #ff4f12;
+    transform: translateY(-2px);
+  }
+
+  /* Logo centralizada */
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo img {
+    height: 52px;
+    object-fit: contain;
+  }
+
+  @media (max-width: 600px) {
+    .header {
+      height: 60px;
+    }
+
+    body {
+      padding-top: 60px;
+    }
+
+    .btn-voltar {
+      left: 12px;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+    }
+
+    .logo img {
+      height: 46px;
+    }
+  }
+</style>

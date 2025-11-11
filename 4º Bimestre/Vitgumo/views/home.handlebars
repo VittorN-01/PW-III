@@ -1,0 +1,391 @@
+<!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+        <img src="img/logo.png" alt="Vitgumo Supermercados">
+    </div>
+
+    <!-- 🔍 Pesquisa com lupa -->
+    <div id="divBusca">
+        <input type="text" id="txtBusca" placeholder="Buscar..."/>
+        <img src="img/search.png" id="btnBusca" style="height: 30px; cursor:pointer;" alt="Buscar"/>
+    </div>
+
+    <!-- 🔑 Login com link -->
+    <div class="login">
+      {{#if usuario}}
+        <span>Olá, {{usuario.nome}}</span>
+        <a href="/vitgumo/1.0.0/logout" class="login-btn">Sair</a>
+      {{else}}
+        <a href="/vitgumo/1.0.0/cadastroLogin" class="login-btn">Login</a>
+      {{/if}}
+    </div>
+
+
+    <!-- 🛒 Carrinho com link -->
+    <div class="carrinho">
+        <a href="/vitgumo/1.0.0/carrinho" class="cart-link">
+        <svg width="36" height="32" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M29.476 21.0058H9.22178L6.45984 6.00144H34.9999L29.476 21.0058Z" fill="white"/>
+            <path d="M1.85681 1H5.53939L6.46004 6.00144M6.46004 6.00144L9.22198 21.0058H29.4762L35 6.00144H6.46004Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11.0632 31.0086C12.0801 31.0086 12.9045 30.2622 12.9045 29.3415C12.9045 28.4208 12.0801 27.6744 11.0632 27.6744C10.0463 27.6744 9.22192 28.4208 9.22192 29.3415C9.22192 30.2622 10.0463 31.0086 11.0632 31.0086Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M27.6349 31.0086C28.6518 31.0086 29.4762 30.2622 29.4762 29.3415C29.4762 28.4208 28.6518 27.6744 27.6349 27.6744C26.618 27.6744 25.7936 28.4208 25.7936 29.3415C25.7936 30.2622 26.618 31.0086 27.6349 31.0086Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        </a>
+    </div>
+  </header>
+
+  <!-- CATEGORIAS -->
+  <nav class="categorias">
+    {{#each categorias}}
+      <a href="#{{this.nome}}" class="categoria-btn">{{this.nome}}</a>
+    {{/each}}
+  </nav>
+
+
+<!-- CARROSSEL DE PRODUTOS -->
+  <section class="produtos">
+    {{#each categorias}}
+      <h3 id="{{this.nome}}" style="text-align: center; color:#000; margin: ">{{this.nome}}</h3>
+      <div class="carrossel-container">
+        <button class="arrow prev">&#10094;</button>
+        <div class="carrossel">
+          {{#each this.produtos}}
+            <div class="produto-card-wrapper">
+              {{> cardProdutos}}
+            </div>
+          {{/each}}
+        </div>
+        <button class="arrow next">&#10095;</button>
+      </div>
+    {{/each}}
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <img src="img/logo.png" alt="Vitgumo Supermercados">
+    </div>
+    <p>SAC: 0800 9370 <br> ENDEREÇO: RUA MARFIM ÁGUA AZUL, 70</p>
+    <p>&copy; 2025 Vitgumo Supermercados. Todos os direitos reservados.</p>
+  </footer>
+
+
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --primary: #003566;
+    --accent: #ff6b35;
+    --success: #90be6d;
+    --radius: 12px;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --transition: 0.25s ease;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 5%;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: var(--shadow);
+  }
+
+  .logo img {
+    height: 52px;
+  }
+
+  #divBusca {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border-radius: 999px;
+    padding: 6px 14px;
+    width: 320px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  #txtBusca {
+    border: none;
+    outline: none;
+    font-size: 15px;
+    flex: 1;
+    color: var(--text);
+  }
+
+  #txtBusca::placeholder {
+    color: var(--muted);
+  }
+
+  .login {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .login span {
+    font-weight: 500;
+  }
+
+  .login-btn {
+    background: #fff;
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: background var(--transition);
+  }
+
+  .login-btn:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .cart-link svg path {
+    transition: stroke var(--transition), fill var(--transition);
+  }
+
+  .cart-link:hover svg path {
+    stroke: var(--accent);
+    fill: var(--accent);
+  }
+
+  /* ===== CATEGORIAS ===== */
+  .categorias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    background: var(--surface);
+    padding: 16px 5%;
+    box-shadow: var(--shadow);
+  }
+
+  .categoria-btn {
+    background: var(--primary);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: transform var(--transition), background var(--transition);
+  }
+
+  .categoria-btn:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* ===== PRODUTOS / CARROSSEL ===== */
+  .produtos {
+    padding: 40px 5%;
+  }
+
+  .produtos h3 {
+    font-size: 1.6rem;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+
+  .carrossel-container {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+
+  .carrossel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+  }
+
+  .carrossel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .produto-card-wrapper {
+    flex: 0 0 220px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background var(--transition);
+  }
+
+  .arrow:hover {
+    background: rgba(0,0,0,0.6);
+  }
+
+  .prev { left: 4px; }
+  .next { right: 4px; }
+
+  /* ===== PRODUTO CARD ===== */
+  .produto {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .produto:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  }
+
+  .produto img {
+    width: 140px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .produto h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+
+  .produto .descricao {
+    font-size: 0.9rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .produto .preco {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: 8px;
+  }
+
+  .btn-carrinho {
+    margin-top: 10px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background var(--transition);
+  }
+
+  .btn-carrinho:hover {
+    background: #ff5a20;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--primary);
+    color: #fff;
+    text-align: center;
+    padding: 28px 5%;
+    margin-top: 40px;
+  }
+
+  .footer img {
+    height: 60px;
+    margin: 0 auto 12px;
+  }
+
+  .footer p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* ===== RESPONSIVIDADE ===== */
+  @media (max-width: 800px) {
+    #divBusca {
+      width: 200px;
+    }
+
+    .categorias {
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .produto {
+      padding: 10px;
+    }
+
+    .produto img {
+      width: 120px;
+      height: 100px;
+    }
+
+    .arrow {
+      font-size: 1.5rem;
+    }
+
+    .login span {
+      display: none;
+    }
+  }
+</style>
+
+
+<script>
+document.querySelectorAll('.carrossel-container').forEach(container => {
+  const carrossel = container.querySelector('.carrossel');
+  const prev = container.querySelector('.prev');
+  const next = container.querySelector('.next');
+
+  prev.addEventListener('click', () => {
+    carrossel.scrollBy({ left: -300, behavior: 'smooth' });
+  });
+
+  next.addEventListener('click', () => {
+    carrossel.scrollBy({ left: 300, behavior: 'smooth' });
+  });
+});
+</script>

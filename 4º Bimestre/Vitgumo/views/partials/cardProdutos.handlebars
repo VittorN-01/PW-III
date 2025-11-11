@@ -1,0 +1,152 @@
+<div class="produto" data-id="{{this.idProduto}}" data-estoque="{{this.quantidade}}">
+  <img src="{{this.imagem}}" alt="{{this.nome}}">
+  <h3>{{this.nome}}</h3>
+  <p class="preco">R$ {{this.preco}}</p>
+
+  <!-- Quantidade -->
+  <div class="quantidade">
+    <button class="menos">-</button>
+    <span class="qtd">1</span>
+    <button class="mais">+</button>
+  </div>
+
+  <!-- Estoque -->
+  <p class="estoque">Estoque: {{this.quantidade}}</p>
+
+  <!-- Botão adicionar ao carrinho -->
+  <button class="btn-carrinho">Adicionar ao carrinho</button>
+</div>
+
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --primary: #003566;
+    --accent: #ff6b35;
+    --success: #90be6d;
+    --radius: 12px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --transition: 0.25s ease;
+  }
+
+  .produto {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px;
+    text-align: center;
+    transition: transform var(--transition), box-shadow var(--transition);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .produto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+
+  .produto img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background: #f1f5f9;
+    border-radius: var(--radius);
+    padding: 10px;
+    margin-bottom: 12px;
+    transition: transform var(--transition);
+  }
+
+  .produto:hover img {
+    transform: scale(1.03);
+  }
+
+  .produto h3 {
+    color: var(--primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .produto .preco {
+    color: var(--accent);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .quantidade {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+  }
+
+  .quantidade button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+  }
+
+  .quantidade button:hover {
+    background: #ff4f12;
+    transform: translateY(-2px);
+  }
+
+  .quantidade .qtd {
+    font-size: 1rem;
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+    color: var(--text);
+  }
+
+  .estoque {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .btn-carrinho {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+  }
+
+  .btn-carrinho:hover {
+    background: #002b4d;
+    transform: translateY(-2px);
+  }
+
+  /* Responsivo */
+  @media (max-width: 600px) {
+    .produto img {
+      height: 160px;
+    }
+
+    .produto h3 {
+      font-size: 1rem;
+    }
+
+    .produto .preco {
+      font-size: 1rem;
+    }
+  }
+</style>

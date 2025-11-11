@@ -1,0 +1,266 @@
+<link rel="stylesheet" href="/css/style.css">
+{{> header}}
+<h1>Seu Carrinho</h1>
+
+{{#if itens.length}}
+  <ul id="lista-carrinho">
+    {{#each itens}}
+      <li data-id="{{idCarrinho}}" data-preco="{{preco}}">
+        <img src="{{imagem}}" alt="{{nome}}" width="80">
+        <strong>{{nome}}</strong> R$ {{preco}}
+        <br>
+
+        <button class="menos">-</button>
+        <span class="quantidade">{{quantidade}}</span>
+        <button class="mais">+</button>
+
+        <span class="total-item">Total: R$ {{totalItem}}</span>
+
+        <button class="remover">Remover</button>
+      </li>
+    {{/each}}
+  </ul>
+
+  <h3>Total Geral: R$ {{totalGeral}}</h3>
+
+  <form id="form-finalizar" action="/vitgumo/1.0.0/carrinho/finalizar" method="POST">
+    <label for="tipoEntrega">Tipo de Entrega:</label>
+    <select name="tipoEntrega" id="tipoEntrega" required>
+      <option value="retirar">Retirar</option>
+      <option value="entrega">Entrega</option>
+    </select>
+
+    <label for="endereco" id="labelEndereco">Endereço (se entrega):</label>
+    <input type="text" name="endereco" id="endereco" placeholder="Rua, número, bairro...">
+
+    <label for="formaPagamento">Forma de Pagamento:</label>
+    <select name="formaPagamento" id="formaPagamento" required>
+      <option value="pix">PIX</option>
+      <option value="credito">Cartão de Crédito</option>
+      <option value="debito">Cartão de Débito</option>
+      <option value="dinheiro">Dinheiro</option>
+    </select>
+
+    <button type="submit">Finalizar Compra</button>
+  </form>
+
+{{else}}
+  <p>Seu carrinho está vazio.</p>
+{{/if}}
+
+<script src="/js/carrinho.js"></script>
+
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --primary: #003566;
+    --accent: #ff6b35;
+    --success: #90be6d;
+    --radius: 12px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --transition: 0.25s ease;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 100px 5% 40px; /* espaçamento considerando o header fixo */
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 30px;
+  }
+
+  /* ===== LISTA DO CARRINHO ===== */
+  #lista-carrinho {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 800px;
+    margin: 0 auto 40px;
+  }
+
+  #lista-carrinho li {
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  #lista-carrinho li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  #lista-carrinho img {
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  #lista-carrinho strong {
+    flex: 1 1 180px;
+    font-size: 1.05rem;
+  }
+
+  .quantidade {
+    font-weight: 600;
+    min-width: 30px;
+    text-align: center;
+  }
+
+  .menos,
+  .mais {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+  }
+
+  .menos:hover,
+  .mais:hover {
+    background: #ff4f12;
+    transform: translateY(-2px);
+  }
+
+  .remover {
+    background: transparent;
+    border: 1px solid #e11d48;
+    color: #e11d48;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+
+  .remover:hover {
+    background: #e11d48;
+    color: #fff;
+  }
+
+  .total-item {
+    font-weight: 600;
+    color: var(--primary);
+    margin-left: 10px;
+  }
+
+  /* ===== TOTAL GERAL ===== */
+  h3 {
+    text-align: center;
+    color: var(--text);
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+  }
+
+  /* ===== FORMULÁRIO FINAL ===== */
+  form {
+    max-width: 500px;
+    background: var(--surface);
+    padding: 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  form label {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  form input,
+  form select {
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+  }
+
+  form input:focus,
+  form select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 53, 102, 0.1);
+  }
+
+  form button[type="submit"] {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background var(--transition), transform var(--transition);
+  }
+
+  form button[type="submit"]:hover {
+    background: #002b4d;
+    transform: translateY(-2px);
+  }
+
+  /* ===== CARRINHO VAZIO ===== */
+  p {
+    text-align: center;
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin-top: 40px;
+  }
+
+  /* ===== RESPONSIVIDADE ===== */
+  @media (max-width: 700px) {
+    #lista-carrinho li {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      text-align: left;
+    }
+
+    #lista-carrinho img {
+      width: 100%;
+      max-width: 120px;
+      margin-bottom: 6px;
+    }
+
+    .menos,
+    .mais {
+      width: 26px;
+      height: 26px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+    }
+  }
+</style>

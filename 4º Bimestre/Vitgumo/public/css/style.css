@@ -1,0 +1,74 @@
+/* Vitgumo — Modernized style.css (drop-in replacement)
+   - Designed to replace your existing style.css entirely.
+   - Keeps your original class names (header, carousel, produto, grid, footer, etc.) so you can drop this file in.
+   - Uses CSS variables so you can tweak the palette quickly at the top.
+   - Focus: cleaner, more airy layout, better contrast, readable typography, consistent spacing.
+*/
+:root{
+  --bg: #F6F8FA;
+  --surface: #FFFFFF;
+  --text: #1E293B; /* dark slate */
+  --muted: #6B7280;
+  --primary: #0B3B66; /* adjusted from #003566 for better legibility */
+  --accent: #FF6B35;
+  --success: #90BE6D;
+  --card-shadow: 0 8px 24px rgba(11,59,102,0.06);
+  --soft-shadow: 0 6px 18px rgba(15,23,42,0.04);
+  --radius: 12px;
+  --gap: 16px;
+}
+/* ===== Reset ===== */
+*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%}body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1.45;font-size:16px}
+a{text-decoration:none;color:inherit}img{max-width:100%;height:auto;display:block}
+.container{max-width:1180px;margin:0 auto;padding:0 20px}
+/* ===== Header ===== */
+.header{display:flex;align-items:center;gap:12px;padding:18px 0;background:transparent;position:sticky;top:0;z-index:60;backdrop-filter: blur(4px)}.header .container{display:flex;align-items:center;width:100%}
+.logo{display:flex;align-items:center;gap:12px}.logo__mark{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#ff8a5a);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px}.logo__text{font-weight:700;font-size:1.05rem;color:var(--primary)}
+.nav{margin-left:auto;display:flex;align-items:center;gap:10px}
+/* search */
+#divBusca{display:flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:6px 10px;border:1px solid rgba(15,23,42,0.06);box-shadow:var(--soft-shadow)}#txtBusca{border:0;background:transparent;padding:8px 6px;font-size:14px;width:220px;outline:none;color:var(--text)}#txtBusca::placeholder{color:var(--muted)}
+.login-btn{background:transparent;color:var(--primary);border:1px solid rgba(11,59,102,0.06);padding:8px 12px;border-radius:10px;cursor:pointer}
+.cart-btn{background:transparent;border:0;cursor:pointer}
+/* ===== Carousel ===== */
+.carousel{display:flex;align-items:center;justify-content:center;margin:20px 0;padding:6px 0}
+.carousel-track{display:flex;gap:12px;overflow:hidden;width:100%;scroll-behavior:smooth;padding:8px}
+.card{flex:0 0 auto;width:170px;background:var(--surface);border-radius:10px;padding:14px;text-align:center;box-shadow:var(--card-shadow);transition:transform 180ms cubic-bezier(.2,.8,.2,1)}.card:hover{transform:translateY(-6px)}.card img{width:100%;height:110px;object-fit:cover;border-radius:8px}.card p{color:var(--text);font-size:0.95rem;margin-top:8px}
+.card span{display:inline-block;color:var(--accent);font-weight:700;font-size:1.05rem}
+/* remove aggressive pulsar animation for a cleaner look */
+
+/* ===== Categories ===== */
+.categorias{width:100%;display:flex;gap:12px;flex-wrap:wrap;padding:12px 0}
+.categoria-btn{background:#fff;color:var(--text);border:1px solid rgba(15,23,42,0.06);padding:10px 14px;border-radius:999px;cursor:pointer;font-weight:600}
+
+/* ===== Product grid ===== */
+.produtos{padding:18px 0}.produtos h2{font-size:1.5rem;color:var(--text);margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.produto{background:var(--surface);border-radius:12px;box-shadow:var(--soft-shadow);padding:14px;display:flex;flex-direction:column;gap:12px;align-items:center;min-height:300px}
+.produto img{width:140px;height:120px;object-fit:cover;border-radius:8px}
+.produto h3{font-size:1.05rem;color:var(--text);margin:6px 0}
+.produto .preco{font-size:1.15rem;font-weight:700;color:var(--primary)}
+.produto .descricao{font-size:0.9rem;color:var(--muted);text-align:center}
+.quantidade{display:flex;align-items:center;gap:8px}
+.quantidade button{background:#f3f4f6;border:0;padding:6px 10px;border-radius:8px;cursor:pointer}
+.quantidade button:hover{background:#e6e9ee}
+.btn-carrinho{background:linear-gradient(180deg,var(--primary),#072b49);color:#fff;border:0;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}
+.btn-carrinho:hover{transform:translateY(-2px)}
+.produto .estoque-info{font-size:0.9rem;color:var(--muted)}
+
+/* price + actions alignment */
+.produto .actions{display:flex;gap:10px;align-items:center;margin-top:auto;width:100%;justify-content:space-between}
+
+/* ===== Footer ===== */
+.footer{background:transparent;padding:28px 0;color:var(--muted)}.footer .container{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer img{height:36px}
+
+/* ===== Responsive tweaks ===== */
+@media (max-width:980px){#txtBusca{width:160px}.card{width:150px}.produto{min-height:260px}}@media (max-width:640px){.header{padding:12px 0}.nav{display:none}.grid{grid-template-columns:repeat(2,1fr)}.logo__text{font-size:0.95rem}}@media (max-width:420px){.grid{grid-template-columns:1fr}.container{padding:0 12px}}
+
+/* ===== Accessibility & small helpers ===== */
+button:focus,input:focus,select:focus{outline:3px solid rgba(11,59,102,0.12);outline-offset:2px}
+.text-muted{color:var(--muted)}.center{display:flex;align-items:center;justify-content:center}
+
+/* ===== Optional: compact variant for dense lists ===== */
+.compact .produto{padding:10px;border-radius:10px}
+
+/* End of file */
