@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test jest",
     "start": "node server.js"
   },
   "keywords": [],
@@ -16,5 +16,11 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "mysql2": "^3.15.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "babel-jest": "^30.2.0",
+    "cross-env": "^10.1.0"
   }
 }

@@ -1,7 +1,3 @@
-// server.js - Vitgumo Supermercado Admin Backend
-// ===============================================
-// Express + MySQL + Rotas Separadas + Public + View Engine (HTML)
-
 import express from "express";
 import path from "path";
 import mysql from "mysql2";
@@ -9,17 +5,21 @@ import bodyParser from "body-parser";
 import produtosRoutes from "./routes/produtos.js";
 
 const app = express();
-const PORT = 3000;
 
 // =====================
 // 🔌 CONEXÃO COM MYSQL
 // =====================
+const dbName = process.env.NODE_ENV === "test"
+  ? "Vitgumo_test"
+  : "Vitgumo";
+
 export const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "1234",
-    database: "Vitgumo"
+    database: dbName
 });
+
 
 db.connect(err => {
     if (err) {
@@ -34,24 +34,24 @@ db.connect(err => {
 // =====================
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-// Public Folder (CSS, JS, Images)
 app.use(express.static(path.join(process.cwd(), "public")));
 
-// =====================
-// ROTAS
-// =====================
-// Página do ADMIN
+// Página Admin
 app.get("/", (req, res) => {
     res.sendFile(path.join(process.cwd(), "views", "admin.html"));
 });
 
-// CRUD de Produtos (rotas separadas)
+// Rotas CRUD
 app.use("/produtos", produtosRoutes);
 
 // =====================
 // ▶️ INICIAR SERVIDOR
 // =====================
-app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== "test") {
+    const PORT = 3001;
+    app.listen(PORT, () => {
+        console.log(`Servidor rodando em http://localhost:${PORT}`);
+    });
+}
+
+export default app;
